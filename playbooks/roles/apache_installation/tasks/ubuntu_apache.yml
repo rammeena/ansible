@@ -1,0 +1,11 @@
+---
+- name: Apache Installation on Debian Family OS
+  apt: name=apache2 update_cache=yes state=latest
+
+- name: write the apache config file
+  template: src=debian_ports.j2 dest=/etc/apache2/ports.conf
+  notify:
+    - restart apache on Debian OS
+
+- name: ensure apache is running (and enable it at boot)
+  service: name=apache2 state=started enabled=yes

@@ -1,0 +1,7 @@
+---
+- include: centos_apache.yml
+  when: ansible_os_family == "RedHat"
+
+- include: ubuntu_apache.yml
+  when: ansible_os_family == "Debian"
+
