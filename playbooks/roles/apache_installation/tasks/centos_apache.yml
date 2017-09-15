@@ -1,0 +1,11 @@
+---
+- name: Apache Installation on Redhat Family OS
+  yum: name=httpd state=latest
+
+- name: write the apache config file
+  template: src=redhat_httpd.j2 dest=/etc/httpd.conf
+  notify:
+    - restart apache on RedHat OS
+
+- name: ensure apache is running (and enable it at boot)
+  service: name=httpd state=started enabled=yes
