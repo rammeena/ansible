@@ -1,3 +1,12 @@
 ---
 # defaults file for apache_installation
-http_port: 80
+apache_http_port: 80
+apache_mpm: "worker"
+apache_server_limit: 250
+apache_start_servers: 10
+apache_min_spare_threads: 75
+apache_max_spare_threads: 250
+apache_thread_limit: 10000
+apache_thread_per_child: 1500
+apache_max_request_workers: 9000
+apache_max_connection_per_child: 1000

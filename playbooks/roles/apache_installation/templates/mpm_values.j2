@@ -1,0 +1,10 @@
+<IfModule mpm_{{apache_mpm}}_module>
+    ServerLimit             {{ apache_server_limit }}
+    StartServers            {{ apache_start_servers }}
+    MinSpareThreads         {{ apache_min_spare_threads }}
+    MaxSpareThreads         {{ apache_max_spare_threads }}
+    ThreadLimit             {{ apache_thread_limit }}
+    ThreadsPerChild         {{ apache_thread_per_child }}
+    MaxRequestWorkers       {{ apache_max_request_workers }}
+    MaxConnectionsPerChild  {{ apache_max_connection_per_child }}
+</IfModule>

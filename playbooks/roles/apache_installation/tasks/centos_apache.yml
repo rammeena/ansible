@@ -7,5 +7,16 @@
   notify:
     - restart apache on RedHat OS
 
+- name: Enable Worker MPM for Apache
+  template: src=worker_mpm.j2 dest=/etc/httpd/conf.modules.d/00-mpm.conf
+  when: apache_mpm == "worker"
+
+- name: Enable Event MPM for Apache
+  template: src=event_mpm.j2 dest=/etc/httpd/conf.modules.d/00-mpm.conf
+  when: apache_mpm == "event"
+
+- name: Setting up MPM Values
+  template: src=mpm_values.j2 dest=/etc/httpd/conf.modules.d/{{ apache_mpm }}_mpm_values.conf
+
 - name: ensure apache is running (and enable it at boot)
   service: name=httpd state=started enabled=yes
