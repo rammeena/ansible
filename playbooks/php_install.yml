@@ -1,0 +1,6 @@
+---
+- name: PHP Installation Web Servers
+  hosts: webservers
+  become: True
+  roles:
+    - { role: php_installation }

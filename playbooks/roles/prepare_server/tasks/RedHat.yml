@@ -1,0 +1,46 @@
+---
+- name: Updating server using 'yum update'
+  yum:
+    name: "*"
+    state: latest
+    update_cache: yes
+
+- name: Installing some necessary packages
+  yum:
+    name: "{{ item }}"
+    state: latest
+  with_items: 
+    - wget
+    - vim
+    - net-tools
+    - firewalld 
+    - telnet
+    - yum-utils
+    - gcc
+    - openssl-devel
+    - gcc-c++
+    - make
+
+- name: Starting firewalld service
+  service: 
+    name: firewalld
+    state: started
+    enabled: yes
+
+- name: Restarting Machine
+  shell: sleep 2 && shutdown -r now "Ansible updates triggered"
+  async: 1
+  poll: 0
+  become: true
+  ignore_errors: true
+  tags: reboot
+
+- name: Waiting for server to reboot and come back
+  wait_for: 
+    host: "{{ inventory_hostname }}"
+    state: started 
+    delay: 15 
+    timeout: 30
+  delegate_to: localhost
+  become: false
+  tags: reboot

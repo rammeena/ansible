@@ -1,0 +1,3 @@
+---
+- include: prepare_server.yml
+- include: apache_install.yml

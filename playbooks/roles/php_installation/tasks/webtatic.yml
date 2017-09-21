@@ -1,0 +1,12 @@
+---
+# Tasks file to add webtatic repo
+- name: Adding webtatic repository for PHP installation
+  yum_repository:
+    name: webtatic
+    description: EPEL Webtatic repo
+    baseurl: https://repo.webtatic.com/yum/el7/$basearch/
+    mirrorlist: https://mirror.webtatic.com/yum/el7/$basearch/mirrorlist
+    gpgcheck: yes
+    gpgkey: https://repo.webtatic.com/yum/RPM-GPG-KEY-webtatic-el7
+    enabled: yes 
+

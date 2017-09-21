@@ -1,0 +1,5 @@
+---
+# tasks file for php
+- include: webtatic.yml
+- include: php_install.yml
+- include: phpmyadmin_install.yml

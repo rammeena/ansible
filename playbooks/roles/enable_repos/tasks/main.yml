@@ -1,0 +1,8 @@
+---
+# tasks file for repo
+- name: Install and enable epel repo on CentOS 7 server
+  yum_repository:
+    name: epel
+    description: EPEL YUM repo for CentOS 7
+    baseurl: http://download.fedoraproject.org/pub/epel/$releasever/$basearch/
+    gpgcheck: no

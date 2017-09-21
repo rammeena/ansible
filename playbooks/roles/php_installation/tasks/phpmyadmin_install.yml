@@ -1,0 +1,11 @@
+---
+# Tasks file to install phpMyAdmin
+- name: Install phpMyAdmin packages
+  yum:
+    name: phpmyadmin
+    state: present
+
+- name: configure phpMyAdmin in apache to allow access on web
+  template:
+    src: phpmyadmin.conf.j2
+    dest: /etc/httpd/conf.d/phpMyAdmin.conf
