@@ -19,6 +19,7 @@
     - gcc
     - openssl
     - make
+    - python-software-properties
 
 - name: Allowing SSH service in ufw firewall
   ufw: 

@@ -1,0 +1,21 @@
+---
+
+- name: Installing MariaDB Packages
+  yum: 
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  with_items:
+    - MariaDB-server 
+    - MariaDB-client
+
+- name: Starting MariaDB service
+  systemd:
+    name: mariadb
+    state: started
+    enabled: yes
+  register: _svc_mariadb
+
+- name: Chaning Root Password for MariaDB
+  command: mysqladmin -u root password {{ mariadb_root_password }}
+  when: _svc_mariadb.changed == True

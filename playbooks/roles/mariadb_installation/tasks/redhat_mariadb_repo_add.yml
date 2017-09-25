@@ -1,0 +1,6 @@
+---
+
+- name: Adding MariaDB Repo on RedHat Family OS
+  template:
+    src: RedHat_MariaDB.Repo.j2
+    dest: /etc/yum.repos.d/mariadb.repo

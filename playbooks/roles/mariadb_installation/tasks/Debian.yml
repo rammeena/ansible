@@ -1,0 +1,4 @@
+---
+
+- include: debian_mariadb_repo_add.yml
+- include: debian_mariadb_installation.yml

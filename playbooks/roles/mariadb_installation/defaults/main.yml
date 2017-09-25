@@ -1,0 +1,4 @@
+---
+# defaults file for mariadb_installation
+mariadb_server_version: 10.1
+mariadb_root_password: mypassword123

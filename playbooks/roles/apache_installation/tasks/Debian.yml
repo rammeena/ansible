@@ -29,7 +29,19 @@
 - name: write the apache port config file
   template: src=debian_ports.j2 dest=/etc/apache2/ports.conf
   notify:
-    - restart apache on Debian OS
+    - Restarting Apache on Debian OS
+
+- name: Allowing http port in ufw firewall 
+  ufw:
+    rule: allow
+    port: 80
+    proto: tcp
+
+- name: Allowing https port in ufw firewall 
+  ufw:
+    rule: allow
+    port: 443
+    proto: tcp
 
 - name: ensure apache is running (and enable it at boot)
   service: 

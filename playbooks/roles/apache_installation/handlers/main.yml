@@ -1,7 +1,14 @@
 ---
 # handlers file for apache_installation
-- name: restart apache on RedHat OS
-  service: name=httpd state=restarted
+- name: Restart Apache on RedHat OS
+  systemd:
+    name: httpd
+    state: restarted
 
-- name: restart apache on Debian OS
+- name: Restarting Apache on Debian OS
   service: name=apache2 state=restarted
+
+- name: Restarting firewalld
+  systemd:
+    name: firewalld
+    state: reloaded

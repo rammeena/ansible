@@ -65,6 +65,4 @@
     src: php.ini.j2
     dest: /etc/php.ini
   notify:
-    - restart apache
-     
-
+    - Restart Apache on RedHat OS

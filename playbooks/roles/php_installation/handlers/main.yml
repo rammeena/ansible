@@ -1,6 +1,9 @@
 ---
-# handlers file for php
- - name: restart apache
-   service:
-      name: httpd
-      state: restarted
+# handlers file for apache_installation
+- name: Restart Apache on RedHat OS
+  systemd:
+    name: httpd
+    state: restarted
+
+- name: Restart Apache on Debian OS
+  service: name=apache2 state=restarted
