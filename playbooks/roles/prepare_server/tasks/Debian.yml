@@ -20,6 +20,7 @@
     - openssl
     - make
     - python-software-properties
+    - software-properties-common 
 
 - name: Allowing SSH service in ufw firewall
   ufw: 
