@@ -1,0 +1,5 @@
+---
+- include: prepare_server.yml
+- include: apache_install.yml
+- include: php_install.yml
+- include: mariadb_install.yml

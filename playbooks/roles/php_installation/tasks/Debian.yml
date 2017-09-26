@@ -1,0 +1,5 @@
+---
+# tasks file for php
+- include: debian_ppa_add.yml
+- include: php_install_debian.yml
+#- include: phpmyadmin_install_debian.yml

@@ -1,0 +1,18 @@
+---
+- block:
+    - name: Installing MariaDB Packages
+      apt: 
+        name: "{{ item }}"
+        state: present
+        update_cache: yes
+        allow_unauthenticated: yes
+      with_items:
+        - mariadb-server 
+      register: _svc_mariadb
+    
+    - name: Chaning Root Password for MariaDB
+      command: mysqladmin -u root password {{ mariadb_root_password }}
+      when: _svc_mariadb.changed == True
+  tags:
+    - mariadb_install
+    - debian_mariadb_install

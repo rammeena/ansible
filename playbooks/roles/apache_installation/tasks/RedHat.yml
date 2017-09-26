@@ -1,0 +1,45 @@
+---
+- block:
+    - name: Apache Installation on Redhat Family OS
+      yum: name=httpd state=latest
+    
+    - name: write the apache config file
+      template: src=redhat_httpd.j2 dest=/etc/httpd/conf/httpd.conf
+      notify:
+        - Restart Apache on RedHat OS
+    
+    - name: Enable Worker MPM for Apache
+      template: src=worker_mpm.j2 dest=/etc/httpd/conf.modules.d/00-mpm.conf
+      when: apache_mpm == "worker"
+    
+    - name: Enable Event MPM for Apache
+      template: src=event_mpm.j2 dest=/etc/httpd/conf.modules.d/00-mpm.conf
+      when: apache_mpm == "event"
+    
+    - name: Setting up MPM Values
+      template: src=mpm_values.j2 dest=/etc/httpd/conf.modules.d/ansible_{{ apache_mpm }}_mpm_values.conf
+    
+    - name: Allowing firewall ports for http
+      firewalld:
+        port: 80/tcp
+        permanent: true
+        state: enabled
+      notify:
+        - Restarting firewalld
+      tags: firewall
+    
+    - name: Allowing firewall ports for https
+      firewalld:
+        port: 443/tcp
+        permanent: true
+        state: enabled
+      notify:
+        - Restarting firewalld
+      tags: firewall
+    
+    - name: Ensure Apache is running and enable it at boot
+      systemd: 
+        name: httpd 
+        state: started 
+        enabled: yes
+  tags: [apache_install,redhat_apache_install]
