@@ -1,50 +1,80 @@
 ---
-- name: Apache Installation on Debian Family OS
-  apt: 
-    update_cache: yes 
-    name: apache2 
-    state: latest
+- block:
+    - name: Apache Installation on Debian Family OS
+      apt: 
+        update_cache: yes 
+        name: apache2 
+        state: latest
+      tags:
+        - apt
 
-#- name: Disable Current MPM if mpm == event
-#  apache2_module:
-#    name: mpm_event
-#    state: absent
-#    force: True
-#    ignore_configcheck: True
-#  when: apache_mpm == 'worker'
-#
-#- name: Enable Worker MPM
-#  apache2_module:
-#    name: mpm_worker
-#    state: present
-#    force: True
-#    ignore_configcheck: True
-#  when: apache_mpm == 'worker'
-
-- name: write the apache mpm config file
-  template: 
-    src: debian_mpm.j2 
-    dest: /etc/apache2/mods-available/mpm_{{ apache_mpm }}.conf
-
-- name: write the apache port config file
-  template: src=debian_ports.j2 dest=/etc/apache2/ports.conf
-  notify:
-    - Restarting Apache on Debian OS
-
-- name: Allowing http port in ufw firewall 
-  ufw:
-    rule: allow
-    port: 80
-    proto: tcp
-
-- name: Allowing https port in ufw firewall 
-  ufw:
-    rule: allow
-    port: 443
-    proto: tcp
-
-- name: ensure apache is running (and enable it at boot)
-  service: 
-    name: apache2 
-    state: started 
-    enabled: yes
+    - name: Disable Current MPM if mpm == prefork
+      apache2_module:
+        name: mpm_prefork
+        state: absent
+        force: True
+        ignore_configcheck: True
+      when: apache_mpm == 'worker' or apache_mpm == 'event'
+      tags:
+        - mpm
+    
+    - name: Disable Current MPM if mpm == event
+      apache2_module:
+        name: mpm_event
+        state: absent
+        force: True
+        ignore_configcheck: True
+      when: apache_mpm == 'worker' or apache_mpm == 'prefork'
+      tags:
+        - mpm
+    
+    - name: Enable Worker MPM
+      apache2_module:
+        name: mpm_worker
+        state: present
+        force: True
+        ignore_configcheck: True
+      when: apache_mpm == 'worker'
+      tags:
+        - mpm
+    
+    - name: write the apache mpm config file
+      template: 
+        src: debian_mpm.j2 
+        dest: /etc/apache2/mods-available/mpm_{{ apache_mpm }}.conf
+      tags:
+        - mpm
+    
+    - name: write the apache port config file
+      template: src=debian_ports.j2 dest=/etc/apache2/ports.conf
+      notify:
+        - Restarting Apache on Debian OS
+    
+    - name: Allowing http port in ufw firewall 
+      ufw:
+        rule: allow
+        port: 80
+        proto: tcp
+      tags: 
+        - ufw
+        - firewall
+    
+    - name: Allowing https port in ufw firewall 
+      ufw:
+        rule: allow
+        port: 443
+        proto: tcp
+      tags: 
+        - ufw
+        - firewall
+    
+    - name: ensure apache is running (and enable it at boot)
+      service: 
+        name: apache2 
+        state: started 
+        enabled: yes
+      tags: 
+        - service
+  tags: 
+    - apache_install
+    - debian_apache_install

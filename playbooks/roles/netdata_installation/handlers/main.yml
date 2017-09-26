@@ -1,0 +1,7 @@
+---
+# handlers file for netdata_installation
+- name: start netdata
+  service: name=netdata state=started
+
+- name: restart netdata
+  service: name=netdata state=restarted

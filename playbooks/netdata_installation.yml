@@ -1,0 +1,7 @@
+---
+#Playbook to install netdata system monitoring tool
+- name: Play to install netdata monitoring tool
+  hosts: all
+  become: yes
+  roles:
+    - { role: netdata_installation }

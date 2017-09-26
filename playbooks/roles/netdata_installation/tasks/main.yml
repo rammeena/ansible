@@ -1,0 +1,42 @@
+---
+# tasks file for netdata_installation
+- block:
+    - name: Installing dependency packages for netdata
+      yum:
+        name: '{{ item }}'
+        state: present
+      items: "{{ redhat.packages }}"
+       
+
+    - name: Cloning netdata source code from git
+      git:
+        clone: yes
+        update: yes
+        dest: '/usr/src/netdata-gitsource'
+        recursive: yes
+        repo: 'https://github.com/firehol/netdata.git'
+      register: gitupdate
+      tags:
+        - netdata_install
+
+    - name: Executing netdata installation script
+      shell: /bin/bash ./netdata-installer.sh -u --install /usr/local --dont-wait --libs-are-really-here >> /tmp/netdata-install.log
+      args:
+        chdir: '/usr/src/netdata-gitsource' 
+      tags:
+        - netdata_install
+      when: gitupdate.changed
+      notify: restart netdata
+
+    - name: Allowing netdata firewall ports
+      firewalld:
+        port: 19999/tcp
+        state: enabled
+        permanent: true
+        immediate: true
+
+    - name: Enabling and Starting netdata service
+      systemd:
+        name: netdata
+        enabled: yes
+        state: started
