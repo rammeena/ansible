@@ -1,0 +1,9 @@
+---
+# tasks file for debug_run
+- name: ping test
+  ping:
+
+- name: debug test for server
+  debug: 
+    msg: "Inventory {{ inventory_hostname }} hast hostname {{ ansible_hostname }}"
+  
