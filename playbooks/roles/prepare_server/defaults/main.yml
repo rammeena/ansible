@@ -1,8 +1,8 @@
 ---
 # defaults file for roles/base
+custom_ssh_port: 33433
 redhat:
   packages:
-    - epel-release
     - wget
     - vim
     - net-tools
@@ -18,8 +18,7 @@ redhat:
   selinux: 
     state: enforcing
     policy: targeted
-    
-
+  
 debian:
   packages:
     - wget

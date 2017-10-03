@@ -1,0 +1,4 @@
+---
+#Group Vars files for ubuntu-servers group
+ansible_user: ubuntu
+

@@ -19,6 +19,7 @@
         state: latest
         update_cache: yes
       with_items: "{{ redhat.packages }}"
+      when: server_update.changed
       tags: basic_packages
     
     - name: Setting Up Selinux
@@ -39,6 +40,7 @@
         port: '{{ custom_ssh_port }}/tcp'
         permanent: true
         state: enabled
+      when: custom_ssh_port is defined
       tags: firewall
       notify: restart firewalld
 

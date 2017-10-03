@@ -1,0 +1,3 @@
+---
+#Group Vars files for centos-servers group
+ansible_user: centos
