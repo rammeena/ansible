@@ -1,6 +1,11 @@
 ---
 # defaults file for roles/base
 custom_ssh_port: 33433
+soft_files_limit: 65536
+hard_files_limit: 65536
+soft_process_limit: 65536
+hard_process_limit: 65536
+
 redhat:
   packages:
     - wget
@@ -14,9 +19,11 @@ redhat:
     - gcc-c++
     - make
     - atop
+    - bc
+    - psmisc
 
   selinux: 
-    state: enforcing
+    state: disabled
     policy: targeted
   
 debian:

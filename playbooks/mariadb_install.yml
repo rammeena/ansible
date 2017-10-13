@@ -1,6 +1,6 @@
 ---
 - name: MariaDB Installation
-  hosts: webservers
+  hosts: all
   become: True
   roles:
     - { role: mariadb_installation }

@@ -1,9 +1,19 @@
 ---
 # tasks file for debug_run
-- name: ping test
-  ping:
 
-- name: debug test for server
-  debug: 
-    msg: Partition UUID is {{ hostvars.webserver1.ansible_devices.vda.partitions.vda1.uuid }}
-  
+#- name: debug groups
+#  debug: 
+#    msg: "{{ groups['dbservers'] }}"
+#
+#- name: debug hostvars
+#  debug: 
+#    var: "{{ hostvars['dbserver-1']['ansible_{{ galera_interface }}']['ipv4']['address'] }}"
+
+#- debug: var=hostvars[inventory_hostname]['ansible_eth0']['ipv4']['address']
+#- debug: var=play_hosts
+#- debug: var=inventory_hostname
+#- debug: var=hostvars[inventory_hostname]
+- name: making db hosts enteries in /etc/hosts
+  template:
+    src: gcom.j2
+    dest: /tmp/hosts

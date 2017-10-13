@@ -8,7 +8,33 @@
       with_items:
         - MariaDB-server 
         - MariaDB-client
-    
+        - xinetd
+ 
+    - name: create temp directory for mysql slow query in memory cache
+      file: 
+        group: mysql
+        mode: 0755
+        owner: mysql
+        path: "{{ mysql_tmp_store }}"
+        state: directory
+
+    - name: Changing Mariadb Configration Settings
+      template:
+        src: mariadb.j2
+        dest: /etc/my.cnf.d/performance_settings.cnf
+        owner: mysql
+        group: mysql
+        mode: 0644
+      notify:
+        - restart mariadb
+
+    - name: Allow MySQL port in firewalld
+      firewalld:
+        port: 3306/tcp
+        permanent: true
+        state: enabled
+      notify: reload firewalld
+
     - name: Starting MariaDB service
       systemd:
         name: mariadb

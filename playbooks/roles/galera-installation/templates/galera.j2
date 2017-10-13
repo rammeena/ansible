@@ -1,0 +1,21 @@
+[galera]
+wsrep_on=ON
+wsrep_provider=/usr/lib64/galera/libgalera_smm.so
+wsrep_cluster_name={{ wsrep_cluster_name }}
+wsrep_cluster_address="gcomm://{% for host in groups['dbservers'] %}{{ hostvars[host][ interface ]['ipv4']['address'] }}{% if not loop.last %},{% endif %}{% endfor %}"
+wsrep_node_address={{ ansible_eth0.ipv4.address }}
+bind-address={{ ansible_eth0.ipv4.address }}
+wsrep_node_name={{ ansible_hostname }}
+wsrep_sst_method={{ wsrep_sst_method }}
+wsrep_slave_threads={{ wsrep_slave_threads }}
+wsrep_provider_options={{ wsrep_provider_options }}
+wsrep_certify_nonPK={{ wsrep_certify_nonPK }}
+wsrep_max_ws_rows={{ wsrep_max_ws_rows }}
+wsrep_max_ws_size={{ wsrep_max_ws_size }}
+wsrep_debug={{ wsrep_debug }}
+wsrep_convert_LOCK_to_trx={{ wsrep_convert_LOCK_to_trx }}
+wsrep_retry_autocommit={{ wsrep_retry_autocommit }}
+wsrep_auto_increment_control={{ wsrep_auto_increment_control }}
+wsrep_drupal_282555_workaround={{ wsrep_drupal_282555_workaround }}
+wsrep_causal_reads={{ wsrep_causal_reads }}
+

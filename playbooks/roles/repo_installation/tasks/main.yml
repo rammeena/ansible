@@ -5,4 +5,5 @@
     name: epel-release
     state: present
     update_cache: yes
-  when: ansible_distribution == "RedHat" and ansible_distribution_major_version == "7"
+  when: (ansible_distribution == "RedHat" and ansible_distribution_major_version == "7") or 
+        (ansible_distribution == "CentOS" and ansible_distribution_major_version == "7")

@@ -1,0 +1,1 @@
+wsrep_cluster_address="gcomm://{% for host in groups['dbservers'] %}{{ hostvars[host][ interface ]['ipv4']['address'] }}{% if not loop.last %},{% endif %}{% endfor %}"

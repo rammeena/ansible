@@ -40,3 +40,4 @@
         name: netdata
         enabled: yes
         state: started
+  when: ansible_os_family == "RedHat"

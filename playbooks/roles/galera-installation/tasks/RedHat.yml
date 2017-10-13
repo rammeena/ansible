@@ -1,0 +1,37 @@
+---
+#Playbook to setup galera cluster with MariaDB
+
+- name: stop mariadb service
+  systemd:
+    name: mariadb
+    state: stopped
+
+- name: making galera nodes enteries in /etc/hosts for name resolution
+  template:
+    src: hosts.j2
+    dest: /etc/hosts
+
+- name: Create Configuration file for galera
+  template:
+     src: galera.j2
+     dest: /etc/my.cnf.d/galera.cnf
+     owner: mysql
+     group: mysql
+     mode: 0644
+
+- name: Allow firewall port 4444 for galera services
+  firewalld:
+    port: "{{ item }}/tcp"
+    permanent: true
+    state: enabled
+  with_items:
+    - 4444
+    - 4567
+    - 4568
+    - 9200
+    - 9300
+  notify: reload firewall
+
+- name: Bootstrap galera services manually
+  debug:
+    msg: "Galera Bootstraping should be done manually"

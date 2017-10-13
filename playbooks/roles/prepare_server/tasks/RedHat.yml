@@ -22,11 +22,27 @@
       when: server_update.changed
       tags: basic_packages
     
+    - name: disabling postfix service - user can enable if required
+      systemd:
+        name: postfix
+        state: stopped
+        enabled: false
+         
+    - name: Increase the maximum number of system handle - nofile and nproc
+      template:
+        src: limits.j2
+        dest: /etc/security/limits.d/ansible_limits.conf
+
     - name: Setting Up Selinux
       selinux:
         state: "{{ redhat.selinux.state }}"
         policy: "{{ redhat.selinux.policy }}"
       tags: selinux
+
+    - name: ensuring firewalld package is installed
+      yum:
+        name: firewalld
+        state: latest
 
     - name: Starting firewalld service
       systemd: 

@@ -1,0 +1,7 @@
+---
+#Playbook to setup galera replication on existing mariadb installed servers
+- name: Play to setup galera replication on mariadb installed servers
+  hosts: all
+  become: yes
+  roles:
+    - { role: galera-installation }

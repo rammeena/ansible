@@ -1,0 +1,4 @@
+---
+# tasks file for galera-installation
+
+- include: "{{ ansible_os_family }}.yml"

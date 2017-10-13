@@ -1,2 +1,11 @@
 ---
 # handlers file for mariadb_installation
+- name: restart mariadb
+  systemd:
+    name: mariadb
+    state: restarted
+
+- name: reload firewalld
+  systemd:
+    name: firewalld
+    state: reloaded

@@ -1,0 +1,42 @@
+[mysqld]
+collation_server = {{ collation_server }}
+init_connect= {{ init_connect }}
+character_set_server = {{ character_set_server }}
+default_storage_engine={{ default_storage_engine }}
+max_connections= {{ max_connections }}
+binlog_format={{ binlog_format }}
+binlog_row_event_max_size={{ binlog_row_event_max_size }}
+binlog_cache_size={{ binlog_cache_size }}
+innodb_autoinc_lock_mode={{ innodb_autoinc_lock_mode }}
+innodb_locks_unsafe_for_binlog= {{ innodb_locks_unsafe_for_binlog }}
+datadir={{ mysql_datadir }} 
+innodb_file_per_table = {{ innodb_file_per_table }}
+innodb_doublewrite = {{ innodb_doublewrite }}
+innodb_flush_log_at_trx_commit = {{ innodb_flush_log_at_trx_commit }}
+innodb_buffer_pool_size = {{ innodb_buffer_pool_size }}
+innodb_flush_method = {{ innodb_flush_method }}
+skip_name_resolve= {{ skip_name_resolve }}
+innodb_log_file_size = {{ innodb_log_file_size }}
+innodb_log_buffer_size = {{ innodb_log_buffer_size }}
+tmpdir = {{ mysql_tmp_store }}
+key_buffer = {{ key_buffer }}
+join_buffer_size = {{ join_buffer_size }}
+read_buffer_size = {{ read_buffer_size }}
+sort_buffer_size = {{ sort_buffer_size }}
+max_heap_table_size = {{ max_heap_table_size }}
+tmp_table_size = {{ tmp_table_size }}
+myisam_sort_buffer_size = {{ myisam_sort_buffer_size }}
+table_cache = {{ table_cache }}
+thread_cache_size = {{ thread_cache_size }}
+interactive_timeout = {{ interactive_timeout }}
+wait_timeout = {{ wait_timeout }}
+connect_timeout = {{ connect_timeout }}
+query_cache_limit = {{ query_cache_limit }}
+query_cache_size = {{ query_cache_size }}
+query_cache_type = {{ query_cache_type }}
+query_cache_min_res_unit = {{ query_cache_min_res_unit }}
+
+#Enabling Slow query log
+slow_query_log = {{ slow_query_log }}
+long_query_time = {{ long_query_time }}
+log_queries_not_using_indexes = {{ log_queries_not_using_indexes }}

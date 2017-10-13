@@ -1,0 +1,6 @@
+---
+# handlers file for galera-installation
+- name: reload firewall
+  systemd:
+    name: firewalld
+    state: reloaded

@@ -17,27 +17,16 @@ debian:
 redhat:
   packages:
     - autoconf
-    - autoconf-archive
     - autogen
     - automake
     - openssl
     - openssl-devel
     - curl
-    - gcc
     - git
     - jq
-    - libtool
     - libmnl-devel
     - libuuid-devel
+    - zlib-devel
+    - gcc
     - make
     - pkgconfig
-    - zlib-devel
-    - python-twisted-core
-    - python-zope-interface
-    - desktop-file-utils
-    - groff
-    - graphviz
-    - selinux-policy-devel
-    - libcap-ng-devel
-    - python-devel
-    - PyYAML
