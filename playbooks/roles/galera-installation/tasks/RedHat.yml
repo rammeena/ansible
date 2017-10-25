@@ -32,6 +32,22 @@
     - 9300
   notify: reload firewall
 
-- name: Bootstrap galera services manually
-  debug:
-    msg: "Galera Bootstraping should be done manually"
+- name: Stop MariaDB on first MariaDB Galera cluster node
+  systemd: 
+    name: mariadb 
+    state: stopped
+  when: inventory_hostname == groups['galera-cluster'][0]
+
+- name: Bootstrap first MariaDB Galera cluster node
+  command: galera_new_cluster
+  when: inventory_hostname == groups['galera-cluster'][0]
+  register: bootstrap
+  any_errors_fatal: true
+
+- name: Restart the other MariaDB Galera cluster nodes
+  systemd: 
+    name: mariadb 
+    state: restarted
+  when: 
+    - inventory_hostname != groups['galera-cluster'][0]
+    - bootstrap|succeeded

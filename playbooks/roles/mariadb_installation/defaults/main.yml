@@ -22,7 +22,6 @@ tmp_table_size: 64M
 myisam_sort_buffer_size: 64M
 table_cache: 1024
 thread_cache_size: 286
-interactive_timeout: 25
 query_cache_limit: 1M
 query_cache_size: 16M
 query_cache_type: 1

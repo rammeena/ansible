@@ -33,6 +33,7 @@
         state: started
         enabled: yes
       register: _svc_mariadb
+      any_errors_fatal: true
     
     - name: Chaning Root Password for MariaDB
       command: mysqladmin -u root password {{ mariadb_root_password }}

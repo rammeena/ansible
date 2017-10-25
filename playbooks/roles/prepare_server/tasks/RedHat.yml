@@ -19,7 +19,6 @@
         state: latest
         update_cache: yes
       with_items: "{{ redhat.packages }}"
-      when: server_update.changed
       tags: basic_packages
     
     - name: disabling postfix service - user can enable if required
