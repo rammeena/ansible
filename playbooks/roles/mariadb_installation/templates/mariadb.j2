@@ -10,6 +10,7 @@ innodb_buffer_pool_size = {{ innodb_buffer_pool_size }}
 innodb_flush_method = {{ innodb_flush_method }}
 innodb_log_file_size = {{ innodb_log_file_size }}
 innodb_log_buffer_size = {{ innodb_log_buffer_size }}
+max_allowed_packet = {{ max_allowed_packet }}
 key_buffer = {{ key_buffer }}
 join_buffer_size = {{ join_buffer_size }}
 read_buffer_size = {{ read_buffer_size }}
@@ -20,12 +21,17 @@ myisam_sort_buffer_size = {{ myisam_sort_buffer_size }}
 table_cache = {{ table_cache }}
 thread_cache_size = {{ thread_cache_size }}
 interactive_timeout = {{ interactive_timeout }}
-wait_timeout = {{ wait_timeout }}
-connect_timeout = {{ connect_timeout }}
 query_cache_limit = {{ query_cache_limit }}
 query_cache_size = {{ query_cache_size }}
 query_cache_type = {{ query_cache_type }}
 query_cache_min_res_unit = {{ query_cache_min_res_unit }}
+wait_timeout = {{ wait_timeout }}
+connect_timeout = {{ connect_timeout }}
+net_write_timeout = {{ net_write_timeout }}
+interactive_timeout = {{ interactive_timeout }}
+net_buffer_length = {{ net_buffer_length }}
+net_read_timeout = {{ net_read_timeout }}
+
 
 #Enabling Slow query log
 slow_query_log = {{ slow_query_log }}

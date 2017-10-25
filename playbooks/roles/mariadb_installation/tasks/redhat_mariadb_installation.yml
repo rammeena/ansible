@@ -10,14 +10,6 @@
         - MariaDB-client
         - xinetd
  
-    - name: create temp directory for mysql slow query in memory cache
-      file: 
-        group: mysql
-        mode: 0755
-        owner: mysql
-        path: "{{ mysql_tmp_store }}"
-        state: directory
-
     - name: Changing Mariadb Configration Settings
       template:
         src: mariadb.j2
