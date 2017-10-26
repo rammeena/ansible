@@ -1,5 +1,8 @@
 ---
 - block:
+    - name: cleaning up any unfinished / pending yum transactions
+      command: yum-complete-transaction --cleanup-only 
+
     - name: Updating server using 'yum update'
       yum:
         name: "*"
@@ -13,8 +16,8 @@
         - yum_update
       register: server_update
 
-    - name: checking for any unfinished / pending yum transactions
-      command: yum-complete-transaction --cleanup-only 
+    - name: completing any unfinished / pending yum transactions
+      command: yum-complete-transaction
 
     - name: Installing some necessary packages
       yum:
@@ -24,7 +27,7 @@
       with_items: "{{ redhat.packages }}"
       tags: basic_packages
 
-    - name: checking for any unfinished / pending yum transactions
+    - name: completing any unfinished / pending yum transactions
       command: yum-complete-transaction
     
     - name: disabling postfix service - user can enable if required
