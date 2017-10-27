@@ -1,8 +1,8 @@
 ---
-- include: repo_install.yml
-- include: prepare_server.yml
-#- include: netdata_installation.yml
+#- include: repo_install.yml
+#- include: prepare_server.yml
+- include: netdata_installation.yml
 #- include: apache_install.yml
 #- include: php_install.yml
-#- include: mariadb_install.yml
-#- include: galera_installation.yml
+- include: mariadb_install.yml
+- include: galera_installation.yml

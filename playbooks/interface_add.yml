@@ -1,0 +1,6 @@
+---
+- name: Play to create additional NIC files in VMs
+  hosts: all
+  become: yes
+  roles:
+    - { role: interface_add }
