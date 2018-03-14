@@ -2,38 +2,27 @@ all:
     hosts:
         Test-VM-1:
             ansible_host: 172.22.24.30
-            ansible_ssh_private_key_file: ~/keys/adminkey.pem
-
 
         Test-VM-2:
             ansible_host: 172.22.24.29
-            ansible_ssh_private_key_file: ~/keys/adminkey.pem
-
 
         Test-VM-3:
             ansible_host: 172.22.24.14
-            ansible_ssh_private_key_file: ~/keys/adminkey.pem
-
-    vars:
-        ansible_user: centos
     children:
-        web_servers:
-            hosts:
-                Test-VM-1:
-                    ansible_host: 172.22.24.30
-                    ansible_ssh_private_key_file: ~/keys/adminkey.pem
-            vars:
-                web_var1: "Ram Meena"
-        db_servers:
+        lamp:
             children:
-                mysql_servers:
+                webservers:
+                    hosts:
+                        Test-VM-1:
+                            ansible_host: 172.22.24.30
+                dbservers:
                     hosts:
                         Test-VM-2:
                             ansible_host: 172.22.24.29
-                            ansible_ssh_private_key_file: ~/keys/adminkey.pem
-            vars:
-                g2_var2: value3
-
-
-
-
+        logservers:
+            hosts:
+                Test-VM-3:
+                    ansible_host: 172.22.24.14
+    vars:
+        ansible_user: centos
+        ansible_ssh_private_key_file: ~/keys/adminkey.pem
